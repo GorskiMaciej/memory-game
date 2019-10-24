@@ -13,7 +13,7 @@ class Game {
             e.preventDefault();
             this.setBoardSize();
             console.log("Number of tiles: " + this.numberOfTiles);
-            this.createBoard(listOfImages);
+            // this.createBoard(listOfImages);
             this.getImage()
                 .then(image => {
                     this.setImage(image)
@@ -26,10 +26,39 @@ class Game {
         this.numberOfPairs = this.boardSize.value;
     }
 
-    getImage = () => {
-        return fetch(`${this.urlApi}/breeds/image/random`)
-            .then(response => response.json())
-            .then(image => image.message)
+    getImages = (numberOfPairs) => {
+        let gettingImages = new Promise(() => {
+            for (let i = 0; i < numberOfPairs; i++) {
+                let indexOfPair = 0;
+                fetch(`${this.urlApi}/breeds/image/random`)
+                    .then(response => response.json())
+                    .then(res => res.message)
+                    .then(img => {
+                        const pair = new Pair(img, indexOfPair)
+                        listOfImages.push(pair);
+                        listOfImages.push(pair);
+                        indexOfPair++;
+                    })
+            }
+        })
+        return gettingImages;
+
+    }
+
+    fillArrayWithDogsPhotos = (numberOfPairs) => {
+        const arrayWithPairs = [];
+    }
+
+    mixArray = (oldArrayParameter) => {
+        const initialArrayLength = oldArrayParameter.length;
+        const oldArray = oldArrayParameter;
+        const newArray = [];
+        for (let i = 0; i < initialArrayLength; i++) {
+            let randomIndex = Math.floor(Math.random() * oldArray.length);
+            newArray.push(oldArray[randomIndex])
+            oldArray.splice(randomIndex, 1);
+        }
+        return newArray;
     }
 
     setImage = (image) => {
@@ -40,8 +69,6 @@ class Game {
         const tile = document.createElement('div');
         tile.setAttribute()
     }
-
-    shuffleArray = () => {}
 
     createBoard = (listOfImages) => {
         let indexOfPair = 0;
@@ -54,7 +81,8 @@ class Game {
                     indexOfPair++;
                     return listOfImages;
                 })
-                .then(promise => console.log(promise))
+                .then(array => this.mixArray(array))
+                .then(promise => console.log(promise));
         }
     }
 
@@ -65,8 +93,6 @@ class Pair {
         this.index = index;
     }
 }
-
-
 
 
 const game = new Game();
