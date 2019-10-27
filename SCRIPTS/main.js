@@ -1,8 +1,5 @@
 class Game {
     constructor() {
-
-        let listOfImages = [];
-
         this.urlApi = "https://dog.ceo/api";
         this.boardSize = document.querySelector('.start-window__tile-number');
         this.numberOfPairs = 0;
@@ -12,12 +9,10 @@ class Game {
         this.playButton.addEventListener('click', (e) => {
             e.preventDefault();
             this.setBoardSize();
-            console.log("Number of tiles: " + this.numberOfTiles);
-            // this.createBoard(listOfImages);
-            this.getImage()
-                .then(image => {
-                    this.setImage(image)
-                })
+            this.setGame(this.numberOfPairs)
+                // .then(res1 => console.log(res1)) // tablic ze zdjęciami jest wyświatlana
+                .then(array => this.mixArray(array))
+                .then(res2 => console.log(res2))
         })
     }
 
@@ -26,31 +21,33 @@ class Game {
         this.numberOfPairs = this.boardSize.value;
     }
 
-    getImages = (numberOfPairs) => {
-        let gettingImages = new Promise(() => {
-            for (let i = 0; i < numberOfPairs; i++) {
-                let indexOfPair = 0;
-                fetch(`${this.urlApi}/breeds/image/random`)
-                    .then(response => response.json())
-                    .then(res => res.message)
-                    .then(img => {
-                        const pair = new Pair(img, indexOfPair)
-                        listOfImages.push(pair);
-                        listOfImages.push(pair);
-                        indexOfPair++;
-                    })
-            }
-        })
-        return gettingImages;
-
+    addImageToArray = (img, indexOfPair, array) => {
+        const pair = new Pair(img, indexOfPair)
+        array.push(pair);
+        array.push(pair);
     }
 
-    fillArrayWithDogsPhotos = (numberOfPairs) => {
-        const arrayWithPairs = [];
+    setGame = (numberOfPairs) => {
+        const listOfImages = [];
+        let indexOfPair = 0;
+        for (let i = 0; i < numberOfPairs; i++) {
+            this.getImage()
+                .then(res => {
+                    this.addImageToArray(res, indexOfPair, listOfImages)
+                    indexOfPair++;
+                })
+        }
+        return Promise.resolve(listOfImages)
+    }
+
+    getImage = () => {
+        return fetch(`${this.urlApi}/breeds/image/random`)
+            .then(response => response.json())
+            .then(res => res.message)
     }
 
     mixArray = (oldArrayParameter) => {
-        const initialArrayLength = oldArrayParameter.length;
+        const initialArrayLength = oldArrayParameter.length; // wartość =0, a powinna być długość tablicy
         const oldArray = oldArrayParameter;
         const newArray = [];
         for (let i = 0; i < initialArrayLength; i++) {
@@ -58,34 +55,18 @@ class Game {
             newArray.push(oldArray[randomIndex])
             oldArray.splice(randomIndex, 1);
         }
-        return newArray;
+        console.log(oldArrayParameter) // wyświatla się poprawnia cała stara tablica
+        return oldArrayParameter;
     }
 
-    setImage = (image) => {
-        this.tileTest.style.backgroundImage = `url("${image}")`;
-    }
+    // setImage = (image) => {
+    //     this.tileTest.style.backgroundImage = `url("${image}")`;
+    // }
 
-    createTile = (imageUrl, indexOfPair) => {
-        const tile = document.createElement('div');
-        tile.setAttribute()
-    }
-
-    createBoard = (listOfImages) => {
-        let indexOfPair = 0;
-        for (let i = 0; i < this.numberOfPairs; i++) {
-            this.getImage()
-                .then(img => {
-                    const pair = new Pair(img, indexOfPair)
-                    listOfImages.push(pair);
-                    listOfImages.push(pair);
-                    indexOfPair++;
-                    return listOfImages;
-                })
-                .then(array => this.mixArray(array))
-                .then(promise => console.log(promise));
-        }
-    }
-
+    // createTile = (imageUrl, indexOfPair) => {
+    //     const tile = document.createElement('div');
+    //     tile.setAttribute()
+    // }
 }
 class Pair {
     constructor(url, index) {
