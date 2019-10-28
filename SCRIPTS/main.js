@@ -10,8 +10,7 @@ class Game {
             e.preventDefault();
             this.setBoardSize();
             this.setGame(this.numberOfPairs)
-                // .then(res1 => console.log(res1)) // tablic ze zdjęciami jest wyświatlana
-                .then(array => this.mixArray(array))
+                .then(array => this.mixArray(array, this.numberOfPairs * 2))
                 .then(res2 => console.log(res2))
         })
     }
@@ -27,11 +26,11 @@ class Game {
         array.push(pair);
     }
 
-    setGame = (numberOfPairs) => {
+    setGame = async (numberOfPairs) => {
         const listOfImages = [];
         let indexOfPair = 0;
         for (let i = 0; i < numberOfPairs; i++) {
-            this.getImage()
+            await this.getImage()
                 .then(res => {
                     this.addImageToArray(res, indexOfPair, listOfImages)
                     indexOfPair++;
@@ -47,16 +46,16 @@ class Game {
     }
 
     mixArray = (oldArrayParameter) => {
-        const initialArrayLength = oldArrayParameter.length; // wartość =0, a powinna być długość tablicy
-        const oldArray = oldArrayParameter;
+        const initialArrayLength = oldArrayParameter.length;
+        let oldArray = oldArrayParameter
         const newArray = [];
         for (let i = 0; i < initialArrayLength; i++) {
             let randomIndex = Math.floor(Math.random() * oldArray.length);
-            newArray.push(oldArray[randomIndex])
+            newArray.push(oldArray[randomIndex]);
             oldArray.splice(randomIndex, 1);
+            console.log(newArray)
         }
-        console.log(oldArrayParameter) // wyświatla się poprawnia cała stara tablica
-        return oldArrayParameter;
+        return newArray;
     }
 
     // setImage = (image) => {
@@ -77,3 +76,6 @@ class Pair {
 
 
 const game = new Game();
+
+// const array = game.mixArray([1, 2, 3, 4, 5, 6])
+// console.log(array)
