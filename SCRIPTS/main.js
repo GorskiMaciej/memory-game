@@ -11,7 +11,12 @@ class Game {
             this.setBoardSize();
             this.setGame(this.numberOfPairs)
                 .then(array => this.mixArray(array, this.numberOfPairs * 2))
-                .then(res2 => console.log(res2))
+                .then(mixedArray => {
+                    mixedArray.forEach(element => {
+                        this.createTile(element.url, element.indexOfPair);
+
+                    })
+                })
         })
     }
 
@@ -58,14 +63,16 @@ class Game {
         return newArray;
     }
 
-    // setImage = (image) => {
-    //     this.tileTest.style.backgroundImage = `url("${image}")`;
-    // }
+    createTile = (imageUrl, indexsOfPair) => {
+        const tile = document.createElement('div');
+        this.tileTest.appendChild(tile);
+        // tile.setAttribute()
+    }
 
-    // createTile = (imageUrl, indexOfPair) => {
-    //     const tile = document.createElement('div');
-    //     tile.setAttribute()
-    // }
+    setImage = (image) => {
+        this.tileTest.style.backgroundImage = `url("${image}")`;
+    }
+
 }
 class Pair {
     constructor(url, index) {
