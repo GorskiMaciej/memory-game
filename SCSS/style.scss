@@ -1,9 +1,4 @@
 @import 'variables';
 @import 'base';
-
-.tileTest {
-    width: 200px;
-    height: 200px;
-    background-color: #444;
-    background-size: cover;
-}
+@import 'tiles';
+@import 'startWindow';

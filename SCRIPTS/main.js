@@ -4,7 +4,7 @@ class Game {
         this.boardSize = document.querySelector('.start-window__tile-number');
         this.numberOfPairs = 0;
         this.playButton = document.querySelector('.start-window__button');
-        this.tileTest = document.querySelector('.tileTest');
+        this.tileContainer = document.querySelector('.tiles-container');
 
         this.playButton.addEventListener('click', (e) => {
             e.preventDefault();
@@ -12,9 +12,9 @@ class Game {
             this.setGame(this.numberOfPairs)
                 .then(array => this.mixArray(array, this.numberOfPairs * 2))
                 .then(mixedArray => {
+                    this.tileContainer.textContent = "";
                     mixedArray.forEach(element => {
-                        this.createTile(element.url, element.indexOfPair);
-
+                        this.createTile(element.url, element.index);
                     })
                 })
         })
@@ -58,19 +58,39 @@ class Game {
             let randomIndex = Math.floor(Math.random() * oldArray.length);
             newArray.push(oldArray[randomIndex]);
             oldArray.splice(randomIndex, 1);
-            console.log(newArray)
         }
         return newArray;
     }
 
     createTile = (imageUrl, indexsOfPair) => {
         const tile = document.createElement('div');
-        this.tileTest.appendChild(tile);
-        // tile.setAttribute()
+        tile.classList.add('tiles-container__tile')
+        tile.setAttribute('data-index', indexsOfPair);
+        tile.setAttribute('data-image', imageUrl);
+        tile.setAttribute('data-rotated', false);
+
+        tile.addEventListener('click', (e) => {
+            this.rotateTile(e.target)
+        });
+        this.tileContainer.appendChild(tile);
+    }
+
+    rotateTile = (tile) => {
+        tile.classList.add('active');
+        setTimeout(() => {
+            if (tile.dataset.rotated == "false") {
+                tile.style.backgroundImage = `url('${tile.dataset.image}')`;
+                tile.setAttribute('data-rotated', true);
+            } else {
+                tile.style.backgroundImage = `url('../IMG/BrainLogo.png')`;
+                tile.setAttribute('data-rotated', false);
+            }
+
+        }, 600, tile);
     }
 
     setImage = (image) => {
-        this.tileTest.style.backgroundImage = `url("${image}")`;
+        this.tileTest.style.backgroundImage = `url('${image}')`;
     }
 
 }
