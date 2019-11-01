@@ -1,5 +1,16 @@
+* {
+    margin: 0;
+}
+
+body {
+    width: 100vw;
+    background-color: $mainColor;
+}
+
 .wrapper {
-    width: 90%;
+    margin: 0 auto;
+    width: 90vw;
     max-width: 1024px;
-    background-color: #f00;
+    min-height: 100vh;
+    background-color: $mainColor;
 }

@@ -14,7 +14,7 @@ class Game {
                 .then(mixedArray => {
                     this.tileContainer.textContent = "";
                     mixedArray.forEach(element => {
-                        this.createTile(element.url, element.index);
+                        this.createTile(element.url, element.index, mixedArray.length);
                     })
                 })
         })
@@ -62,13 +62,13 @@ class Game {
         return newArray;
     }
 
-    createTile = (imageUrl, indexsOfPair) => {
+    createTile = (imageUrl, indexsOfPair, arrayLenght) => {
         const tile = document.createElement('div');
+        let tileSize = 0;
         tile.classList.add('tiles-container__tile')
         tile.setAttribute('data-index', indexsOfPair);
         tile.setAttribute('data-image', imageUrl);
         tile.setAttribute('data-rotated', false);
-
         tile.addEventListener('click', (e) => {
             this.rotateTile(e.target)
         });
@@ -85,13 +85,22 @@ class Game {
                 tile.style.backgroundImage = `url('../IMG/BrainLogo.png')`;
                 tile.setAttribute('data-rotated', false);
             }
-
         }, 600, tile);
     }
 
     setImage = (image) => {
         this.tileTest.style.backgroundImage = `url('${image}')`;
     }
+
+    // setTileWidth = (numberOftiles) => {
+    //     let numberOfColoumns = Math.sqrt(numberOftiles);
+    //     if ((numberOfColoumns - Math.floor(numberOfColoumns)) < 0.5) {
+    //         numberOfColoumns = Math.floor(numberOfColoumns);
+    //     } else {
+    //         numberOfColoumns = Math.floor(numberOfColoumns) + 1;
+    //     }
+    //     return `calc((100% / ${numberOfColoumns}) - 5px)`;
+    // }
 
 }
 class Pair {
