@@ -22,7 +22,6 @@ class Game {
 
     setBoardSize = () => {
         let indexOfSelectedLevel = this.boardSize.selectedIndex;
-        console.log(this.boardSize.options[indexOfSelectedLevel].text)
         if (indexOfSelectedLevel === 0) {
             this.numberOfPairs = 2;
         } else if (indexOfSelectedLevel === 1) {
