@@ -1,23 +1,24 @@
 .tiles-container {
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-wrap: wrap;
     flex-basis: 200px;
+    align-items: stretch;
 }
 
 .tiles-container__tile {
     box-sizing: border-box;
-    margin: 5px;
-    width: 100px;
-    height: 100px;
+    border: 2px solid $mainColor;
+    background-color: lighten($mainColor, 2%);
     background-image: url($tileLogo);
-    border: 10px solid $mainColor;
     border-radius: 5%;
-    box-shadow: 0 0 0 2px $tileBorder;
     background-size: cover;
 
     &:hover {
         cursor: pointer;
-        box-shadow: 0 0 1px 4px $tileBorder;
+        background-color: #fff;
+        // box-shadow: 0 0 1px 4px $tileBorder;
         transition: 0.3s;
     }
 }

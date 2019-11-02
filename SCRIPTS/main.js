@@ -62,10 +62,12 @@ class Game {
         return newArray;
     }
 
-    createTile = (imageUrl, indexsOfPair, arrayLenght) => {
+    createTile = (imageUrl, indexsOfPair, numberOfTils) => {
         const tile = document.createElement('div');
-        let tileSize = 0;
-        tile.classList.add('tiles-container__tile')
+        let tileSize = this.setTileWidth(numberOfTils);
+        tile.classList.add('tiles-container__tile');
+        tile.style.width = `${tileSize}`;
+        // tile.style.height = `${tileSize}`;
         tile.setAttribute('data-index', indexsOfPair);
         tile.setAttribute('data-image', imageUrl);
         tile.setAttribute('data-rotated', false);
@@ -92,15 +94,18 @@ class Game {
         this.tileTest.style.backgroundImage = `url('${image}')`;
     }
 
-    // setTileWidth = (numberOftiles) => {
-    //     let numberOfColoumns = Math.sqrt(numberOftiles);
-    //     if ((numberOfColoumns - Math.floor(numberOfColoumns)) < 0.5) {
-    //         numberOfColoumns = Math.floor(numberOfColoumns);
-    //     } else {
-    //         numberOfColoumns = Math.floor(numberOfColoumns) + 1;
-    //     }
-    //     return `calc((100% / ${numberOfColoumns}) - 5px)`;
-    // }
+    setTileWidth = (numberOftiles) => {
+        let numberOfColoumns = Math.sqrt(numberOftiles);
+        // if ((numberOfColoumns - Math.floor(numberOfColoumns)) < 0.5) {
+        //     numberOfColoumns = Math.floor(numberOfColoumns);
+        // } else {
+        //     numberOfColoumns = Math.floor(numberOfColoumns) + 1;
+        // }
+        numberOfColoumns = Math.floor(numberOfColoumns);
+        return `calc((100% / ${numberOfColoumns}))`;
+        // return `calc((100% / ${numberOfColoumns}) - 10px)`;
+        // return "100%";
+    }
 
 }
 class Pair {

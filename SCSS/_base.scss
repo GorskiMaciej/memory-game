@@ -3,14 +3,22 @@
 }
 
 body {
+    position: relative;
     width: 100vw;
+    height: 100vh;
     background-color: $mainColor;
 }
 
 .wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     margin: 0 auto;
     width: 90vw;
-    max-width: 1024px;
-    min-height: 100vh;
+    height: 90vw;
+    max-height: 90vh;
+    max-width: 90vh;
     background-color: $mainColor;
+    border: 1px solid #222;
 }
