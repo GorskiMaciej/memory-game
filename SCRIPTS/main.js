@@ -1,7 +1,7 @@
 class Game {
     constructor() {
         this.urlApi = "https://dog.ceo/api";
-        this.boardSize = document.querySelector('.start-window__tile-number');
+        this.boardSize = document.querySelector('.start-window__level-select');
         this.numberOfPairs = 0;
         this.playButton = document.querySelector('.start-window__button');
         this.tileContainer = document.querySelector('.tiles-container');
@@ -10,7 +10,7 @@ class Game {
             e.preventDefault();
             this.setBoardSize();
             this.setGame(this.numberOfPairs)
-                .then(array => this.mixArray(array, this.numberOfPairs * 2))
+                .then(array => this.mixArray(array))
                 .then(mixedArray => {
                     this.tileContainer.textContent = "";
                     mixedArray.forEach(element => {
@@ -21,8 +21,17 @@ class Game {
     }
 
     setBoardSize = () => {
-        this.numberOfTiles = this.boardSize.value * 2;
-        this.numberOfPairs = this.boardSize.value;
+        let indexOfSelectedLevel = this.boardSize.selectedIndex;
+        console.log(this.boardSize.options[indexOfSelectedLevel].text)
+        if (indexOfSelectedLevel === 0) {
+            this.numberOfPairs = 2;
+        } else if (indexOfSelectedLevel === 1) {
+            this.numberOfPairs = 8;
+        } else if (indexOfSelectedLevel === 2) {
+            this.numberOfPairs = 18;
+        } else {
+            this.numberOfPairs = 32;
+        }
     }
 
     addImageToArray = (img, indexOfPair, array) => {
