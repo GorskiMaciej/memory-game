@@ -6,24 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Doggo Memory game</title>
+    <script src="https://kit.fontawesome.com/d7f104decb.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../CSS/style.css">
 </head>
 
 <body>
     <div class="wrapper">
-        <form action="" class="start-window">
-            <label for="" class="start-window__label">Select level:</label>
-            <select class="start-window__level-select">
-                <option>beginner</option>
-                <option>easy</option>
-                <option>medium</option>
-                <option>hard</option>
-            </select>
-            <button class="start-window__button">Play!</button>
-        </form>
-        <div class="tiles-container"></div>
-    </div>
-    <script src="../SCRIPTS/main.js"></script>
+        <section class="start-window">
+            <form action="" class="start-window__form">
+                <label for="" class="start-window__label">Select level:</label>
+                <select class="start-window__level-select">
+                    <option>beginner</option>
+                    <option>easy</option>
+                    <option>medium</option>
+                    <option>hard</option>
+                </select>
+                <button class="start-window__button">Play!</button>
+            </form>
+        </section>
+        <section class="game-board">
+            <div class="game-board__reset-button"><i class="fas fa-redo-alt"></i></div>
+            <div class="tiles-container">
+
+            </div>
+        </section>
+
+        <script src="../SCRIPTS/main.js"></script>
 </body>
 
 </html>

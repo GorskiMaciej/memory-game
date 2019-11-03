@@ -4,10 +4,14 @@ class Game {
         this.boardSize = document.querySelector('.start-window__level-select');
         this.numberOfPairs = 0;
         this.playButton = document.querySelector('.start-window__button');
+        this.resetButton = document.querySelector('.game-board__reset-button')
+        this.startSection = document.querySelector('.start-window')
+        this.board = document.querySelector('.game-board')
         this.tileContainer = document.querySelector('.tiles-container');
 
         this.playButton.addEventListener('click', (e) => {
             e.preventDefault();
+            this.startSectionOff();
             this.setBoardSize();
             this.setGame(this.numberOfPairs)
                 .then(array => this.mixArray(array))
@@ -18,6 +22,19 @@ class Game {
                     })
                 })
         })
+
+        this.resetButton.addEventListener('click', () => {
+            this.startSectionOn();
+        })
+    }
+
+    startSectionOff = () => {
+        this.startSection.style.display = "none";
+        this.board.style.display = "block";
+    }
+    startSectionOn = () => {
+        this.startSection.style.display = "flex";
+        this.board.style.display = "none";
     }
 
     setBoardSize = () => {
