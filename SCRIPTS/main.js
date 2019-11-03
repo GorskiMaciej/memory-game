@@ -85,7 +85,7 @@ class Game {
     }
 
     rotateTile = (tile) => {
-        tile.classList.add('active');
+        tile.classList.add('tiles-container__tile--active');
         setTimeout(() => {
             if (tile.dataset.rotated == "false") {
                 tile.style.backgroundImage = `url('${tile.dataset.image}')`;
@@ -94,6 +94,7 @@ class Game {
                 tile.style.backgroundImage = `url('../IMG/BrainLogo.png')`;
                 tile.setAttribute('data-rotated', false);
             }
+            tile.style.transform = "scaleX(-1)";
         }, 600, tile);
     }
 

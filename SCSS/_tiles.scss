@@ -22,4 +22,16 @@
     }
 }
 
-.active {}
+.tiles-container__tile--active {
+    animation: rotateTile 1.2s ease-in-out 0s 1 normal none;
+}
+
+@keyframes rotateTile {
+    0% {
+        transform: perspective(1000px) rotateY(0deg);
+    }
+
+    100% {
+        transform: perspective(1000px) rotateY(180deg);
+    }
+}
