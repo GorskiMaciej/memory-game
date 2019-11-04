@@ -33,7 +33,7 @@
 
     &:hover {
         cursor: pointer;
-        background-color: #bbb;
+        background-color: $tileColor;
         transition: 0.6s;
     }
 }
