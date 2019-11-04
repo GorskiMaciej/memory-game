@@ -1,3 +1,33 @@
 .start-window {
     display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 100%;
+}
+
+.start-window__form {
+    display: flex;
+    flex-direction: column;
+}
+
+.start-window__label {
+    margin: 5px;
+    color: $mainFontColor;
+    font-size: 20px;
+    font-family: $mainFont, arial, sans-serif;
+}
+
+.start-window__level-select {
+    margin: 5px;
+    font-size: 20px;
+    font-family: $mainFont, arial, sans-serif;
+    text-align: center;
+}
+
+.start-window__button {
+    margin: 5px;
+    font-size: 20px;
+    font-family: $mainFont, arial, sans-serif;
 }
