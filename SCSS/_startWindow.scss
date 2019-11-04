@@ -31,6 +31,17 @@
     text-align: center;
 }
 
+.start-window__option {
+    margin: 15px 0;
+    background-color: $mainColor;
+    border: 2px solid $btnColor;
+    border-radius: 5px;
+    color: $mainFontColor;
+    font-size: 20px;
+    font-family: $mainFont, arial, sans-serif;
+    text-align: center;
+}
+
 .start-window__button {
     box-sizing: border-box;
     margin: 15px 0;

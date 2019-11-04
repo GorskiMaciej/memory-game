@@ -28,6 +28,10 @@ class Game {
         })
     }
 
+    // cleartileContainer = () => {
+    //     this.tileContainer = "";
+    // }
+
     startSectionOff = () => {
         this.startSection.style.display = "none";
         this.board.style.display = "block";
