@@ -25,12 +25,13 @@ class Game {
 
         this.resetButton.addEventListener('click', () => {
             this.startSectionOn();
+            this.cleartileContainer();
         })
     }
 
-    // cleartileContainer = () => {
-    //     this.tileContainer = "";
-    // }
+    cleartileContainer = () => {
+        this.tileContainer.textContent = "";
+    }
 
     startSectionOff = () => {
         this.startSection.style.display = "none";
