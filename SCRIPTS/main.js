@@ -102,12 +102,13 @@ class Game {
         tile.setAttribute('data-rotated', false);
         tile.addEventListener('click', (e) => {
             this.rotateTile(e.target)
+            console.log(tile.getAttribute('data-index'));
         });
         this.tileContainer.appendChild(tile);
     }
 
     rotateTile = (tile) => {
-        tile.classList.add('tiles-container__tile--active');
+        tile.classList.toggle('tiles-container__tile--active');
         setTimeout(() => {
             if (tile.dataset.rotated == "false") {
                 tile.style.backgroundImage = `url('${tile.dataset.image}')`;
@@ -118,6 +119,10 @@ class Game {
             }
             tile.style.transform = "scaleX(-1)";
         }, 600, tile);
+    }
+
+    reverseRotateTile = () => {
+
     }
 
     setImage = (image) => {

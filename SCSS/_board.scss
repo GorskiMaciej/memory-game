@@ -30,6 +30,7 @@
     background-image: url($tileLogo);
     border-radius: 5%;
     background-size: cover;
+    animation: reversedRotateTile 1.2s ease-in-out 0s 1 normal none;
 
     &:hover {
         cursor: pointer;
@@ -49,6 +50,16 @@
 
     100% {
         transform: perspective(1000px) rotateY(180deg);
+    }
+}
+
+@keyframes reversedRotateTile {
+    0% {
+        transform: perspective(1000px) rotateY(180deg);
+    }
+
+    100% {
+        transform: perspective(1000px) rotateY(0deg);
     }
 }
 
