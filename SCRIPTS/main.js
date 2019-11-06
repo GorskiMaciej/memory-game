@@ -1,7 +1,8 @@
 class Game {
     constructor() {
         this.urlApi = "https://dog.ceo/api";
-        this.choosenTileIndex = -1;
+        this.selectedTileIndex = -1;
+        this.selectedTiles = [];
         this.boardSize = document.querySelector('.start-window__level-select');
         this.numberOfPairs = 0;
         this.playButton = document.querySelector('.start-window__button');
@@ -76,26 +77,34 @@ class Game {
     }
 
     checkIfMatched = (tile) => {
-        if (this.choosenTileIndex === -1) {
+        if (this.selectedTileIndex === -1) {
             //first tile
             console.log('first tile choosen')
-            this.choosenTileIndex = tile.getAttribute('data-index') * 1;
-
+            this.selectedTileIndex = tile.getAttribute('data-index') * 1;
+            this.selectedTiles.push(tile);
             console.log(tile.getAttribute('data-index') * 1);
-        } else if (this.choosenTileIndex === tile.getAttribute('data-index') * 1) {
+        } else if (this.selectedTileIndex === tile.getAttribute('data-index') * 1) {
             //matched
             console.log('second tile choosen');
             console.log('win');
-            this.choosenTileIndex = -1;
-
+            this.selectedTiles.push(tile);
+            this.selectedTileIndex = -1;
         } else {
             //unmatched
             console.log('second tile choosen');
             console.log('loose');
-            this.choosenTileIndex = -1;
+            this.selectedTiles.push(tile);
+            this.selectedTileIndex = -1;
+        }
+
+        if (this.selectedTiles.length < 2) {
+
+        } else {
 
         }
     }
+
+
 
     getImage = () => {
         return fetch(`${this.urlApi}/breeds/image/random`)
@@ -126,7 +135,6 @@ class Game {
         tile.addEventListener('click', (e) => {
             this.rotateTile(e.target);
             this.checkIfMatched(e.target, this.choosenTileIndex);
-            console.log(this.choosenTileIndex);
         });
         this.tileContainer.appendChild(tile);
     }
