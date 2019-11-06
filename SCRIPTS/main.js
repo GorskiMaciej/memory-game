@@ -1,6 +1,7 @@
 class Game {
     constructor() {
         this.urlApi = "https://dog.ceo/api";
+        this.choosenTileIndex = -1;
         this.boardSize = document.querySelector('.start-window__level-select');
         this.numberOfPairs = 0;
         this.playButton = document.querySelector('.start-window__button');
@@ -74,6 +75,28 @@ class Game {
         return Promise.resolve(listOfImages)
     }
 
+    checkIfMatched = (tile) => {
+        if (this.choosenTileIndex === -1) {
+            //first tile
+            console.log('first tile choosen')
+            this.choosenTileIndex = tile.getAttribute('data-index') * 1;
+
+            console.log(tile.getAttribute('data-index') * 1);
+        } else if (this.choosenTileIndex === tile.getAttribute('data-index') * 1) {
+            //matched
+            console.log('second tile choosen');
+            console.log('win');
+            this.choosenTileIndex = -1;
+
+        } else {
+            //unmatched
+            console.log('second tile choosen');
+            console.log('loose');
+            this.choosenTileIndex = -1;
+
+        }
+    }
+
     getImage = () => {
         return fetch(`${this.urlApi}/breeds/image/random`)
             .then(response => response.json())
@@ -101,8 +124,9 @@ class Game {
         tile.setAttribute('data-image', imageUrl);
         tile.setAttribute('data-rotated', false);
         tile.addEventListener('click', (e) => {
-            this.rotateTile(e.target)
-            console.log(tile.getAttribute('data-index'));
+            this.rotateTile(e.target);
+            this.checkIfMatched(e.target, this.choosenTileIndex);
+            console.log(this.choosenTileIndex);
         });
         this.tileContainer.appendChild(tile);
     }
@@ -130,6 +154,12 @@ class Game {
         numberOfColoumns = Math.floor(numberOfColoumns);
         return `calc((100% / ${numberOfColoumns}))`;
     }
+
+    changeIndex = () => {
+        this.choosenTileIndex++;
+    }
+
+
 }
 class Pair {
     constructor(url, index) {
