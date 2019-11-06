@@ -12,6 +12,11 @@
     font-size: 20px;
     cursor: pointer;
     animation: rotateResetBtn 1.2s linear 0s 2 normal none;
+    transition: 0.3s;
+
+    &:hover {
+        color: $btnColor;
+    }
 }
 
 .tiles-container {

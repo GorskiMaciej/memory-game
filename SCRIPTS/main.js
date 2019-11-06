@@ -121,10 +121,6 @@ class Game {
         }, 600, tile);
     }
 
-    reverseRotateTile = () => {
-
-    }
-
     setImage = (image) => {
         this.tileTest.style.backgroundImage = `url('${image}')`;
     }
