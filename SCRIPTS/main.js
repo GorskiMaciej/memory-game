@@ -83,7 +83,7 @@ class Game {
             this.selectedTileIndex = tile.getAttribute('data-index') * 1;
             this.selectedTiles.push(tile);
             console.log(tile.getAttribute('data-index') * 1);
-        } else if (this.selectedTileIndex === tile.getAttribute('data-index') * 1) {
+        } else if ((this.selectedTileIndex === tile.getAttribute('data-index') * 1) && tile.dataset.rotated == "false") {
             //matched
             console.log('second tile choosen');
             console.log('win');
