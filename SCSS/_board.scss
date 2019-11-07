@@ -30,8 +30,8 @@
 
 .tiles-container__tile {
     box-sizing: border-box;
-    border: 4px solid $mainColor;
-    background-color: lighten($mainColor, 2%);
+    border: 2px solid $mainColor;
+    background-color: lighten($mainColor, 10%);
     background-image: url($tileLogo);
     border-radius: 5%;
     background-size: cover;
