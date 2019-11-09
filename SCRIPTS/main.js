@@ -6,9 +6,10 @@ class Game {
         this.boardSize = document.querySelector('.start-window__level-select');
         this.numberOfPairs = 0;
         this.playButton = document.querySelector('.start-window__button');
-        this.resetButton = document.querySelector('.game-board__reset-button')
-        this.startSection = document.querySelector('.start-window')
-        this.board = document.querySelector('.game-board')
+        this.resetButton = document.querySelector('.game-board__reset-button');
+        this.startSection = document.querySelector('.start-window');
+        this.board = document.querySelector('.game-board');
+        this.containerCover = document.querySelector('.game-board__container-cover');
         this.tileContainer = document.querySelector('.tiles-container');
 
         this.playButton.addEventListener('click', (e) => {
@@ -104,6 +105,7 @@ class Game {
             console.log('second tile choosen');
             console.log('loose');
             this.selectedTiles.push(tile);
+            this.containerCover.style.zIndex = 2;
             this.selectedTileIndex = -1;
 
             if (this.selectedTiles.length === 2) {
@@ -112,6 +114,7 @@ class Game {
                         this.rotateTile(this.selectedTiles[i]);
                     }
                     this.selectedTiles = [];
+                    this.containerCover.style.zIndex = 0;
                 }, 2000);
 
             }
