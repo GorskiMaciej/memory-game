@@ -5,12 +5,15 @@ class Game {
         this.selectedTiles = [];
         this.boardSize = document.querySelector('.start-window__level-select');
         this.numberOfPairs = 0;
+        this.matchedPairsCounter = 0;
         this.playButton = document.querySelector('.start-window__button');
         this.resetButton = document.querySelector('.game-board__reset-button');
+        this.againButton = document.querySelector('.win-window__button');
         this.startSection = document.querySelector('.start-window');
         this.board = document.querySelector('.game-board');
         this.containerCover = document.querySelector('.game-board__container-cover');
         this.tileContainer = document.querySelector('.tiles-container');
+        this.winWndow = document.querySelector('.win-window');
 
         this.playButton.addEventListener('click', (e) => {
             e.preventDefault();
@@ -30,6 +33,11 @@ class Game {
             this.startSectionOn();
             this.cleartileContainer();
         })
+
+        this.againButton.addEventListener('click', () => {
+            this.startSectionOn();
+            this.cleartileContainer();
+        })
     }
 
     cleartileContainer = () => {
@@ -37,12 +45,14 @@ class Game {
     }
 
     startSectionOff = () => {
-        this.startSection.style.display = "none";
-        this.board.style.display = "block";
+        this.startSection.style.display = 'none';
+        this.board.style.display = 'block';
+        this.tileContainer.display = 'flex';
     }
     startSectionOn = () => {
-        this.startSection.style.display = "flex";
-        this.board.style.display = "none";
+        this.startSection.style.display = 'flex';
+        this.board.style.display = 'none';
+        this.winWndow.style.display = 'none';
     }
 
     setBoardSize = () => {
@@ -100,6 +110,7 @@ class Game {
                 this.selectedTiles = [];
             }
             this.selectedTileIndex = -1;
+            this.matchedPairsCounter++;
         } else {
             //unmatched
             console.log('second tile choosen');
@@ -118,6 +129,12 @@ class Game {
                 }, 2000);
 
             }
+        }
+        if (this.matchedPairsCounter === this.numberOfPairs) {
+            setTimeout(() => {
+                this.winWindowDisplayer()
+            }, 2000)
+
         }
 
 
@@ -184,6 +201,11 @@ class Game {
 
     changeIndex = () => {
         this.choosenTileIndex++;
+    }
+
+    winWindowDisplayer = () => {
+        this.board.style.display = 'none';
+        this.winWndow.style.display = 'flex';
     }
 
 

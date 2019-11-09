@@ -43,21 +43,5 @@
 }
 
 .start-window__button {
-    box-sizing: border-box;
-    margin: 15px 0;
-    padding: 10px;
-    width: 300px;
-    color: $mainFontColor;
-    background-color: $btnColor;
-    border: 2px solid $btnColor;
-    border-radius: 5px;
-    font-size: 20px;
-    font-family: $mainFont, arial, sans-serif;
-    transition: 0.3s;
-    ;
-
-    &:hover {
-        background-color: $mainColor;
-        border: 2px solid $btnColor;
-    }
+    @include buttons;
 }
