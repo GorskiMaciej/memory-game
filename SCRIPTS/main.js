@@ -92,6 +92,7 @@ class Game {
                 for (let i = 0; i < 2; i++) {
                     this.selectedTiles[i].style.transition = '2s';
                     this.selectedTiles[i].style.opacity = '30%';
+                    this.selectedTiles[i].style.filter = 'grayscale(80%)'
                     this.selectedTiles[i].style.zIndex = -1;
 
                 }
