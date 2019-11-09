@@ -88,6 +88,15 @@ class Game {
             console.log('second tile choosen');
             console.log('win');
             this.selectedTiles.push(tile);
+            if (this.selectedTiles.length === 2) {
+                for (let i = 0; i < 2; i++) {
+                    this.selectedTiles[i].style.transition = '2s';
+                    this.selectedTiles[i].style.opacity = '30%';
+                    this.selectedTiles[i].style.zIndex = -1;
+
+                }
+                this.selectedTiles = [];
+            }
             this.selectedTileIndex = -1;
         } else {
             //unmatched
@@ -95,13 +104,19 @@ class Game {
             console.log('loose');
             this.selectedTiles.push(tile);
             this.selectedTileIndex = -1;
+
+            if (this.selectedTiles.length === 2) {
+                setTimeout(() => {
+                    for (let i = 0; i < 2; i++) {
+                        this.rotateTile(this.selectedTiles[i]);
+                    }
+                    this.selectedTiles = [];
+                }, 2000);
+
+            }
         }
 
-        if (this.selectedTiles.length < 2) {
 
-        } else {
-
-        }
     }
 
 
